@@ -1,0 +1,28 @@
+<div class="transaction-overview-container">
+    <table class="tg">
+        <thead>
+            <tr>
+                <th class="first tg-0lax">Bild</th>
+                <th class="tg-0lax">Klassifikation</th>
+                <th class="tg-0lax">Aktion</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let fruit of fruits | async">
+                <td>
+                    <img *ngIf="fruit.fileBase64String"
+                         src="{{'data:image/png;base64,' + fruit.fileBase64String}}"
+                         width="50" height="50" [title]="fruit.id">
+                </td>
+                <td>
+                    <input type="text" [(ngModel)]="fruit.type" placeholder="fruit">
+                </td>
+                <td>
+                    <button (click)="sendClassification(fruit)">Bestätigen</button>
+                    <img *ngIf="fruit.classifiedByUser" src="assets/Ok.png" class="template-icon" alt="I" title="Vom Benutzer klassifiziert" />
+                    <img *ngIf="fruit.error" src="assets/NotOk.png" class="template-icon" alt="I" [title]="fruit.error" />
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
